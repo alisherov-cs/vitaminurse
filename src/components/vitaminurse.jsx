@@ -1200,11 +1200,13 @@ export default function VitamiNurse() {
           </p>
           <div
             style={{
+              position: "relative",
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
               gap: 40,
               marginBottom: 10,
+              zIndex: 2,
             }}
             className="qnt-container"
           >
