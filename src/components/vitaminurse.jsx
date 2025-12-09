@@ -9,6 +9,8 @@ import {
   CheckCircle,
   ArrowRight,
   Sparkles,
+  PlusIcon,
+  MinusIcon,
 } from "lucide-react";
 
 export default function VitamiNurse() {
@@ -20,6 +22,17 @@ export default function VitamiNurse() {
     phone: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [qnt, setQnt] = useState(0);
+
+  const increment = () => {
+    setQnt((prev) => prev + 1);
+  };
+
+  const decrement = () => {
+    if (qnt === 0) return;
+
+    setQnt((prev) => prev - 1);
+  };
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +42,7 @@ export default function VitamiNurse() {
     e.preventDefault();
     setShowSuccess(true);
     setFormData({ firstName: "", lastName: "", phone: "" });
+    setQnt(0);
     setTimeout(() => setShowSuccess(false), 5000);
   };
 
@@ -1153,7 +1167,11 @@ export default function VitamiNurse() {
           background: "rgba(255,255,255,0.02)",
         }}
       >
-        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+        <div
+          style={{ maxWidth: "700px", margin: "0 auto", position: "relative" }}
+        >
+          <img src="/bg.png" className="form-bg" />
+
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
@@ -1161,6 +1179,8 @@ export default function VitamiNurse() {
               fontWeight: "900",
               textAlign: "center",
               marginBottom: "20px",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             Бизга мурожаат қилинг
@@ -1172,10 +1192,42 @@ export default function VitamiNurse() {
               opacity: 0.8,
               marginBottom: "60px",
               fontWeight: "300",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             Маълумотларингизни қолдиринг, биз сиз билан боғланамиз
           </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: 40,
+              marginBottom: 10,
+            }}
+            className="qnt-container"
+          >
+            <h3>Миқдорни киритинг</h3>
+            <div style={{ display: "flex", padding: 10, gap: 10 }}>
+              <button className="quentity-btn" onClick={decrement}>
+                <MinusIcon />
+              </button>
+              <input
+                value={qnt}
+                style={{
+                  width: 70,
+                  borderRadius: 10,
+                  outline: "none",
+                  textAlign: "center",
+                  fontSize: 18,
+                }}
+              />
+              <button className="quentity-btn" onClick={increment}>
+                <PlusIcon />
+              </button>
+            </div>
+          </div>
 
           {showSuccess && (
             <div
@@ -1206,6 +1258,8 @@ export default function VitamiNurse() {
             style={{
               padding: "50px",
               borderRadius: "24px",
+              position: "relative",
+              zIndex: 2,
             }}
           >
             <div style={{ marginBottom: "30px" }}>
