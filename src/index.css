@@ -144,6 +144,12 @@ body {
   gap: 200px;
 }
 
+@media screen and (max-width: 1000px) {
+  .bg-image {
+    display: none;
+  }
+}
+
 .bg-image {
   position: relative;
   width: 250px;
