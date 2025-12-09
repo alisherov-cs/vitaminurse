@@ -14,6 +14,23 @@ import {
 export default function VitamiNurse() {
   const [activeStage, setActiveStage] = useState(0);
   const [_, setScrollY] = useState(0);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+  });
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowSuccess(true);
+    setFormData({ firstName: "", lastName: "", phone: "" });
+    setTimeout(() => setShowSuccess(false), 5000);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -926,6 +943,7 @@ export default function VitamiNurse() {
           </h2>
 
           <div
+            className="glass-card-list"
             style={{ display: "flex", flexDirection: "column", gap: "25px" }}
           >
             {risks.map((item, index) => (
@@ -940,7 +958,7 @@ export default function VitamiNurse() {
                   alignItems: "center",
                 }}
               >
-                <div>
+                <div className="shield-container">
                   <Shield
                     size={24}
                     style={{
@@ -960,10 +978,11 @@ export default function VitamiNurse() {
                   </div>
                 </div>
                 <ArrowRight
+                  className="arrow-icon"
                   size={32}
                   style={{ color: "#4ecdc4", flexShrink: 0 }}
                 />
-                <div>
+                <div className="shield-container">
                   <CheckCircle
                     size={24}
                     style={{ marginBottom: "15px", color: "#00b894" }}
@@ -1124,6 +1143,219 @@ export default function VitamiNurse() {
             Бизга қўшилинг
             <Sparkles size={24} />
           </button>
+        </div>
+      </div>
+
+      {/* Contact Form */}
+      <div
+        style={{
+          padding: "100px 20px",
+          background: "rgba(255,255,255,0.02)",
+        }}
+      >
+        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(36px, 5vw, 56px)",
+              fontWeight: "900",
+              textAlign: "center",
+              marginBottom: "20px",
+            }}
+          >
+            Бизга мурожаат қилинг
+          </h2>
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "18px",
+              opacity: 0.8,
+              marginBottom: "60px",
+              fontWeight: "300",
+            }}
+          >
+            Маълумотларингизни қолдиринг, биз сиз билан боғланамиз
+          </p>
+
+          {showSuccess && (
+            <div
+              className="slide-in"
+              style={{
+                background: "linear-gradient(135deg, #00b894 0%, #00d2a0 100%)",
+                padding: "25px 40px",
+                borderRadius: "16px",
+                textAlign: "center",
+                marginBottom: "30px",
+                fontSize: "20px",
+                fontWeight: "600",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "15px",
+                boxShadow: "0 10px 40px rgba(0, 184, 148, 0.3)",
+              }}
+            >
+              <CheckCircle size={28} />
+              Аризангiz қабул қилинди!
+            </div>
+          )}
+
+          <form
+            onSubmit={handleSubmit}
+            className="glass-card"
+            style={{
+              padding: "50px",
+              borderRadius: "24px",
+            }}
+          >
+            <div style={{ marginBottom: "30px" }}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "12px",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  opacity: 0.9,
+                }}
+              >
+                Исм
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "18px 24px",
+                  fontSize: "16px",
+                  borderRadius: "12px",
+                  border: "2px solid rgba(255, 255, 255, 0.2)",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  color: "#fff",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+                onFocus={(e) => {
+                  e.target.style.border = "2px solid #00b894";
+                  e.target.style.background = "rgba(255, 255, 255, 0.08)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.border = "2px solid rgba(255, 255, 255, 0.2)";
+                  e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "30px" }}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "12px",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  opacity: 0.9,
+                }}
+              >
+                Фамилия
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+                style={{
+                  width: "100%",
+                  padding: "18px 24px",
+                  fontSize: "16px",
+                  borderRadius: "12px",
+                  border: "2px solid rgba(255, 255, 255, 0.2)",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  color: "#fff",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+                onFocus={(e) => {
+                  e.target.style.border = "2px solid #00b894";
+                  e.target.style.background = "rgba(255, 255, 255, 0.08)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.border = "2px solid rgba(255, 255, 255, 0.2)";
+                  e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "40px" }}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "12px",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  opacity: 0.9,
+                }}
+              >
+                Телефон рақам
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                placeholder="+998 xx xxx xx xx"
+                style={{
+                  width: "100%",
+                  padding: "18px 24px",
+                  fontSize: "16px",
+                  borderRadius: "12px",
+                  border: "2px solid rgba(255, 255, 255, 0.2)",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  color: "#fff",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+                onFocus={(e) => {
+                  e.target.style.border = "2px solid #00b894";
+                  e.target.style.background = "rgba(255, 255, 255, 0.08)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.border = "2px solid rgba(255, 255, 255, 0.2)";
+                  e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="sparkle glow"
+              style={{
+                width: "100%",
+                background: "linear-gradient(135deg, #00b894 0%, #00d2a0 100%)",
+                border: "none",
+                padding: "20px",
+                borderRadius: "12px",
+                color: "#fff",
+                fontSize: "18px",
+                fontWeight: "700",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "12px",
+              }}
+            >
+              Юбориш
+              <ArrowRight size={22} />
+            </button>
+          </form>
         </div>
       </div>
 

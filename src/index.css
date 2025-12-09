@@ -156,3 +156,21 @@ body {
   height: 400px;
   object-fit: cover;
 }
+
+@media screen and (max-width: 600px) {
+  .glass-card {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .arrow-icon {
+    transform: rotate(90deg);
+  }
+
+  .shield-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
